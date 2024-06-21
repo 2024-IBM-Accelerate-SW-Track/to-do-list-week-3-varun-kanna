@@ -65,6 +65,17 @@ test("test that App component doesn't render duplicate Task", () => {
 
 test("test that App component doesn't add a task without task name", () => {
 	render(<App />);
+	const inputDate = screen.getByPlaceholderText('mm/dd/yyyy');
+	const addButton = screen.getByRole('button', { name: /Add/i });
+	const dueDate = '05/30/2023';
+
+	// Add the first task
+	fireEvent.change(inputDate, { target: { value: dueDate } });
+	fireEvent.click(addButton);
+
+	// Verify no cards are rendered, meaning we check for default case
+	const message = screen.getByText("You have no todo's left");
+	expect(message).toBeInTheDocument();
 });
 
 test("test that App component doesn't add a task without due date", () => {
