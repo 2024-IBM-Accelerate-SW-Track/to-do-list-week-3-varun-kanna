@@ -53,7 +53,10 @@ const Todos = ({ todos, deleteTodo }) => {
 	);
 	// Lastly, return the todoList constant that we created above to show all of the items on the screen.
 	return (
-		<div className='todoCollection' style={{ padding: '10px' }}>
+		<div
+			className='todoCollection'
+			style={{ padding: '10px' }}
+			data-testid='todo-collection'>
 			{todoList}
 		</div>
 	);
