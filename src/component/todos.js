@@ -37,6 +37,7 @@ const Todos = ({ todos, deleteTodo }) => {
 								style={{ paddingLeft: 0 }}
 								color='primary'
 								onClick={() => deleteTodo(todo.id)}
+								data-testid={'new-item-delete'}
 							/>
 							<ListItemText
 								primary={todo.content}

@@ -104,12 +104,29 @@ test('test that App component can be deleted thru checkbox', () => {
 	fireEvent.change(inputDate, { target: { value: dueDate } });
 	fireEvent.click(addButton);
 
-	// Check that the color is not white
-	const historyCheck =
-		screen.getByTestId(/History Test/i).style.backgroundColor;
-	expect(historyCheck).toBe('rgb(151, 49, 49)');
+	// Delete the task
+	const deleteTask = screen.getByTestId('new-item-delete');
+	fireEvent.click(deleteTask);
+
+	// Verify no cards are rendered, meaning we check for default case
+	const message = screen.getByText("You have no todo's left");
+	expect(message).toBeInTheDocument();
 });
 
 test('test that App component renders different colors for past due events', () => {
 	render(<App />);
+	const inputTask = screen.getByRole('textbox', { name: /Add New Item/i });
+	const inputDate = screen.getByPlaceholderText('mm/dd/yyyy');
+	const addButton = screen.getByRole('button', { name: /Add/i });
+	const dueDate = '05/30/2023';
+
+	// Add the first task
+	fireEvent.change(inputTask, { target: { value: 'History Test' } });
+	fireEvent.change(inputDate, { target: { value: dueDate } });
+	fireEvent.click(addButton);
+
+	// Check that the color is not white
+	const historyCheck =
+		screen.getByTestId(/History Test/i).style.backgroundColor;
+	expect(historyCheck).toBe('rgb(151, 49, 49)');
 });
