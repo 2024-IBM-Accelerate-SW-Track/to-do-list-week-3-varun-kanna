@@ -80,6 +80,15 @@ test("test that App component doesn't add a task without task name", () => {
 
 test("test that App component doesn't add a task without due date", () => {
 	render(<App />);
+	const inputTask = screen.getByRole('textbox', { name: /Add New Item/i });
+	const addButton = screen.getByRole('button', { name: /Add/i });
+
+	// Add the first task
+	fireEvent.change(inputTask, { target: { value: 'History Test' } });
+	fireEvent.click(addButton);
+
+	const message = screen.getByText("You have no todo's left");
+	expect(message).toBeInTheDocument();
 });
 
 test('test that App component can be deleted thru checkbox', () => {
