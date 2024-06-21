@@ -16,7 +16,25 @@ afterEach(() => {
 	container = null;
 });
 
-test("test that App component doesn't render dupicate Task", () => {
+test('test that App component renders Task', () => {
+	render(<App />);
+	const inputTask = screen.getByRole('textbox', { name: /Add New Item/i });
+	const inputDate = screen.getByPlaceholderText('mm/dd/yyyy');
+	const element = screen.getByRole('button', { name: /Add/i });
+	const dueDate = '05/30/2023';
+
+	fireEvent.change(inputTask, { target: { value: 'History Test' } });
+	fireEvent.change(inputDate, { target: { value: dueDate } });
+	fireEvent.click(element);
+
+	const check = screen.getByText(/History Test/i);
+	const checkDate = screen.getByTestId('new-item-date');
+
+	expect(check).toBeInTheDocument();
+	expect(checkDate).toBeInTheDocument();
+});
+
+test("test that App component doesn't render duplicate Task", () => {
 	render(<App />);
 });
 

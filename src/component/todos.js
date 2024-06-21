@@ -38,7 +38,11 @@ const Todos = ({ todos, deleteTodo }) => {
 								color='primary'
 								onClick={() => deleteTodo(todo.id)}
 							/>
-							<ListItemText primary={todo.content} secondary={todo.due} />
+							<ListItemText
+								primary={todo.content}
+								secondary={todo.due}
+								data-testid={'new-item-date'}
+							/>
 						</ListItemButton>
 					</Card>
 				</Grid>
